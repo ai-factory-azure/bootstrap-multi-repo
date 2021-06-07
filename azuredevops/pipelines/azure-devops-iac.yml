@@ -1,6 +1,9 @@
 trigger:
 - main
 
+variables:
+- group: bootstrap-variables
+
 jobs:
 - job: Linux
   pool:
@@ -18,6 +21,13 @@ jobs:
   - bash: az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(System.TeamProject) --use-git-aliases true
     displayName: 'Set default Azure DevOps organization and project'
 
-  - bash: |
+  - bash:
       az devops project create --name 'TestProject2'
     displayName: 'Create a new project'
+    
+  - bash:
+      echo $AZURE_DEVOPS_EXT_GITHUB_PAT
+      echo $github-pat-token
+      az pipelines variable update --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $github-pat-token
+      echo $AZURE_DEVOPS_EXT_GITHUB_PAT
+    displayName: 'Create Github Service Endpoint'
