@@ -31,5 +31,5 @@ jobs:
       echo $github-pat-token
       az pipelines variable update --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $github-pat-token --secret true
       echo $AZURE_DEVOPS_EXT_GITHUB_PAT
-      az devops service-endpoint github create --github-url 'https://github.com/ai-factory-azure/iac-arm'--name 'Github-IAC' --project 'TestProject2'
+      az devops service-endpoint github create --github-url 'https://github.com/ai-factory-azure/iac-arm'--name 'Github-IAC' --org 'https://dev.azure.com/ai-factory-azure' --project 'TestProject2'
     displayName: 'Create Github Service Endpoint'
