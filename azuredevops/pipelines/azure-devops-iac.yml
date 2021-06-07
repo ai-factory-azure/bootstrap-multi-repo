@@ -29,6 +29,6 @@ jobs:
       echo $AZURE_DEVOPS_EXT_GITHUB_PAT
       echo "From variable:"
       echo $github-pat-token
-      az pipelines variable update --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $github-pat-token
+      az pipelines variable update --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $github-pat-token --secret true
       echo $AZURE_DEVOPS_EXT_GITHUB_PAT
     displayName: 'Create Github Service Endpoint'
