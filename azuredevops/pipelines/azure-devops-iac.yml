@@ -26,6 +26,7 @@ jobs:
   #   displayName: 'Create a new project'
 
   - bash:
+      az pipelines variable list
       echo $AZURE_DEVOPS_EXT_GITHUB_PAT
       echo "From variable:"
       echo $github-pat-token
