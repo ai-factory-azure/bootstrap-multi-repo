@@ -19,5 +19,5 @@ jobs:
     displayName: 'Set default Azure DevOps organization and project'
 
   - bash: |
-      az devops project create --name 'TestProject1'
+      az devops project create --name 'TestProject2'
     displayName: 'Create a new project'
