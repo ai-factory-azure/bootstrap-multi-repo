@@ -26,7 +26,8 @@ jobs:
   #   displayName: 'Create a new project'
 
   - bash:
-      export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
+      # export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
+      az pipelines variable create --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $(github-pat-token) --secret true
     displayName: 'Set PAT'
 
   - bash:
