@@ -4,7 +4,7 @@ trigger:
 variables:
 - group: bootstrap-variables-kv
 - name: AZURE_DEVOPS_EXT_GITHUB_PAT
-  value: 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
+  value: initialvalue
 
 jobs:
 - job: Linux
@@ -31,6 +31,9 @@ jobs:
   #     # export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
   #     az pipelines variable create --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $(github-pat-token) --secret true
   #   displayName: 'Set PAT'
+
+  - bash: echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_GITHUB_PAT]$(github-pat-token)'
+    displayName: Set new variable value
 
   - bash:
       # az pipelines variable list
