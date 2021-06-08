@@ -26,12 +26,15 @@ jobs:
   #   displayName: 'Create a new project'
 
   - bash:
+      export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
+    displayName: 'Set PAT'
+
+  - bash:
       # az pipelines variable list
       # echo $AZURE_DEVOPS_EXT_GITHUB_PAT
       # echo "From variable:"
       # echo $github-pat-token
       # az pipelines variable update --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $github-pat-token --secret true
-      # echo $AZURE_DEVOPS_EXT_GITHUB_PAT
-      export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
+      # echo $AZURE_DEVOPS_EXT_GITHUB_PAT      
       az devops service-endpoint github create --github-url 'https://github.com/ai-factory-azure/iac-arm' --name 'Github-IAC' --org 'https://dev.azure.com/ai-factory-azure' --project 'TestProject1'
     displayName: 'Create Github Service Endpoint'
