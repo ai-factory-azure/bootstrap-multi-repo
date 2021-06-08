@@ -3,7 +3,6 @@ trigger:
 
 variables:
 - group: bootstrap-variables-kv
-# - name: AZURE_DEVOPS_EXT_GITHUB_PAT
 
 jobs:
 - job: Linux
@@ -26,23 +25,12 @@ jobs:
   #     az devops project create --name 'TestProject1'
   #   displayName: 'Create a new project'
 
-  # - bash:
-  #     # export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
-  #     az pipelines variable create --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $(github-pat-token) --secret true
-  #   displayName: 'Set PAT'
-
   - bash: echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_GITHUB_PAT]$(github-pat-token)'
-    displayName: Set new variable value
+    displayName: Set Github PAT variable value
 
-  - bash:
-      # az pipelines variable list
-      # echo $AZURE_DEVOPS_EXT_GITHUB_PAT
-      # echo "From variable:"
-      # echo $github-pat-token
-      # az pipelines variable update --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $github-pat-token --secret true
-      # echo $AZURE_DEVOPS_EXT_GITHUB_PAT      
+  - bash: 
       az devops service-endpoint github create --github-url 'https://github.com/ai-factory-azure' --name 'Github-AI-Factory' --org 'https://dev.azure.com/ai-factory-azure' --project 'TestProject1'
-      # az devops service-endpoint update --id $DOCKER_CONNECTION_ID --enable-for-all
+      az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all
       # az devops service-endpoint update --id --enable-for-all true      
     displayName: 'Create Github Service Endpoint'
 
