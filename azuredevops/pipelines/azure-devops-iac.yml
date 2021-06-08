@@ -52,6 +52,15 @@ jobs:
                                           --project 'TestProject1'
     displayName: 'Create Azure Service Connection'
 
+  # - bash:
+  #     az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all --debug
+  #   displayName: 'Update endpoint'
+
   - bash:
-      az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all --debug
-    displayName: 'Update endpoint'
+      az pipelines create --name 'MNIST-IAC' 
+                          --description 'Pipeline for MNIST Project' 
+                          --repository https://github.com/ai-factory-azure/iac-arm 
+                          --branch main
+                          --yml-path pipelines/iac-create-environment-pipeline-arm.yml
+                          --service-connection Github-AI-Factory
+    displayName: 'Create Pipeline from YAML'
