@@ -3,6 +3,8 @@ trigger:
 
 variables:
 - group: bootstrap-variables-kv
+- name: AZURE_DEVOPS_EXT_GITHUB_PAT
+  value: $(github-pat-token)
 
 jobs:
 - job: Linux
@@ -25,10 +27,10 @@ jobs:
   #     az devops project create --name 'TestProject1'
   #   displayName: 'Create a new project'
 
-  - bash:
-      # export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
-      az pipelines variable create --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $(github-pat-token) --secret true
-    displayName: 'Set PAT'
+  # - bash:
+  #     # export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
+  #     az pipelines variable create --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $(github-pat-token) --secret true
+  #   displayName: 'Set PAT'
 
   - bash:
       # az pipelines variable list
