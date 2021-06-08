@@ -21,9 +21,9 @@ jobs:
   - bash: az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(System.TeamProject) --use-git-aliases true
     displayName: 'Set default Azure DevOps organization and project'
     
-  - bash:
-      az devops project create --name 'TestProject1'
-    displayName: 'Create a new project'
+  # - bash:
+  #     az devops project create --name 'TestProject1'
+  #   displayName: 'Create a new project'
 
   - bash:
       # az pipelines variable list
