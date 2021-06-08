@@ -47,5 +47,5 @@ jobs:
     displayName: 'Create Github Service Endpoint'
 
   - bash:
-      az devops service-endpoint update --id $DOCKER_CONNECTION_ID --enable-for-all
+      az devops service-endpoint update --id $(DOCKER_CONNECTION_ID) --enable-for-all
     displayName: 'Update endpoint'
