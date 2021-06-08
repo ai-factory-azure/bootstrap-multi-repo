@@ -3,7 +3,7 @@ trigger:
 
 variables:
 - group: bootstrap-variables-kv
-- name: AZURE_DEVOPS_EXT_GITHUB_PAT
+# - name: AZURE_DEVOPS_EXT_GITHUB_PAT
 
 jobs:
 - job: Linux
@@ -47,7 +47,7 @@ jobs:
     displayName: 'Create Github Service Endpoint'
 
   - bash:
-      echo $(GITHUB_CONNECTION_ID)
+      echo $GITHUB_CONNECTION_ID
       echo $DOCKER_CONNECTION_ID
     #  az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all
     displayName: 'Update endpoint'
