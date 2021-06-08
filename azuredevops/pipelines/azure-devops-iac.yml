@@ -41,12 +41,11 @@ jobs:
       # echo $github-pat-token
       # az pipelines variable update --name 'AZURE_DEVOPS_EXT_GITHUB_PAT' --value $github-pat-token --secret true
       # echo $AZURE_DEVOPS_EXT_GITHUB_PAT      
-      az devops service-endpoint github create --github-url 'https://github.com/ai-factory-azure' --name 'Github-AI-Factory' --org 'https://dev.azure.com/ai-factory-azure' --project 'TestProject1' --enable-for-all true
+      az devops service-endpoint github create --github-url 'https://github.com/ai-factory-azure' --name 'Github-AI-Factory' --org 'https://dev.azure.com/ai-factory-azure' --project 'TestProject1'
       # az devops service-endpoint update --id $DOCKER_CONNECTION_ID --enable-for-all
       # az devops service-endpoint update --id --enable-for-all true      
     displayName: 'Create Github Service Endpoint'
 
-  # - bash:
-  #     # export AZURE_DEVOPS_EXT_GITHUB_PAT= $(github-pat-token)
-  #     az devops service-endpoint update --id --enable-for-all true 
-  #   displayName: 'Update endpoint'
+  - bash:
+      az devops service-endpoint update --id $DOCKER_CONNECTION_ID --enable-for-all
+    displayName: 'Update endpoint'
