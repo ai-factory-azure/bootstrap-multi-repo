@@ -25,7 +25,9 @@ jobs:
   #     az devops project create --name 'TestProject1'
   #   displayName: 'Create a new project'
 
-  - bash: echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_GITHUB_PAT]$(github-pat-token)'
+  - bash: 
+      echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_GITHUB_PAT]$(github-pat-token)'
+      echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY]$(azure-rm-dev-sp-key)'
     displayName: Set Github PAT variable value
 
   - bash: 
@@ -36,6 +38,15 @@ jobs:
       # az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all
       # az devops service-endpoint update --id --enable-for-all true      
     displayName: 'Create Github Service Endpoint'
+
+  - bash:
+      az devops service-endpoint azurerm create --azure-rm-service-principal-id '9b378764-4f58-4b48-8915-b95d9a364e74'
+                                          --azure-rm-subscription-id 'd661a889-c8b8-41f2-93ab-99b3ed99b6e7'
+                                          --azure-rm-subscription-name 'Microsoft Azure Internal Consumption -MK'
+                                          --azure-rm-tenant-id '72f988bf-86f1-41af-91ab-2d7cd011db47'
+                                          --name 'Azure-ARM-Dev'
+                                          --org 'https://dev.azure.com/ai-factory-azure' 
+                                          --project 'TestProject1'
 
   # - bash:
   #     az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all
