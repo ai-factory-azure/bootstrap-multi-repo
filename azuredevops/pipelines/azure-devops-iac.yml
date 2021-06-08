@@ -4,7 +4,6 @@ trigger:
 variables:
 - group: bootstrap-variables-kv
 - name: AZURE_DEVOPS_EXT_GITHUB_PAT
-  value: initialvalue
 
 jobs:
 - job: Linux
