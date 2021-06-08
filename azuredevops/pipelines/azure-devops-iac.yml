@@ -52,6 +52,6 @@ jobs:
                                           --project 'TestProject1'
     displayName: 'Create Azure Service Connection'
 
-  # - bash:
-  #     az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all
-  #   displayName: 'Update endpoint'
+  - bash:
+      az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all --debug
+    displayName: 'Update endpoint'
