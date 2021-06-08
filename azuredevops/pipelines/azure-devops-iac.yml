@@ -47,5 +47,6 @@ jobs:
     displayName: 'Create Github Service Endpoint'
 
   - bash:
-      az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all
+      echo $GITHUB_CONNECTION_ID
+    #  az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all
     displayName: 'Update endpoint'
