@@ -62,7 +62,7 @@ jobs:
                           --repository https://github.com/ai-factory-azure/iac-arm 
                           --branch main
                           --yml-path pipelines/iac-create-environment-pipeline-arm.yml
-                          --service-connection Github-AI-Factory
+                          --service-connection 6ed8cf6e-5ce5-4c10-8653-0832a2d4b27c
                           --org 'https://dev.azure.com/ai-factory-azure' 
                           --project 'TestProject1'                          
     displayName: 'Create Pipeline from YAML'
