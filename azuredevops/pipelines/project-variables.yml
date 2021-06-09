@@ -1,0 +1,37 @@
+# Template that lists variables for bootsrap process
+variables:
+
+# Azure DevOps variables
+    # Name for the Azure DevOps project
+  - name: PROJECT_NAME
+    value: TestProject1
+
+# Azure Variables
+    # Name for the Azure Service connection endpoint
+  - name: AZURE_SERVICE_ENDPOINT_NAME
+    value: Azure-ARM-Dev
+
+# Github Variables
+    # Org URL for the github org where the github project is / will be hosted
+  - name: GITHUB_ORG_URL
+    value: https://github.com/ai-factory-azure
+    # Name for the Github Service connection endpoint
+  - name: GITHUB_SERVICE_ENDPOINT_NAME
+    value: Github-AI-Factory 
+
+# Pipeline variables
+    # Name for the Infrastructure as Code pipeline
+  - name: IAC_PIPELINE_NAME
+    value: MNIST-IAC   
+    # Description for the IAC pipeline
+  - name: IAC_PIPELINE_DESCRIPTION
+    value: Pipeline for MNIST Project
+    # Repository url for the IAC repo
+  - name: IAC_REPOSITORY_URL
+    value:  https://github.com/ai-factory-azure/iac-arm 
+    # IAC Branch for creating the pipeline
+  - name: IAC_BRANCH
+    value:  main    
+    # Pipeline YML path
+  - name: IAC_YML_PATH
+    value: pipelines/iac-create-environment-pipeline-arm.yml
