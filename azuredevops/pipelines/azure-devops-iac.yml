@@ -20,7 +20,7 @@ jobs:
     displayName: 'Login Azure DevOps Extension'
   
   - bash:
-      az devops project create --name $(PROJECT-NAME)
+      az devops project create --name $(PROJECT-NAME) --organization $(System.TeamFoundationCollectionUri)
     continueOnError: true    
     displayName: 'Create a new project'
 
