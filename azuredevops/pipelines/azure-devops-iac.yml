@@ -83,7 +83,7 @@ jobs:
     displayName: 'Install gh' 
 
   - bash:
-      gh auth login
+      gh auth login --with-token
     displayName: 'gh login'
 
   - bash:
