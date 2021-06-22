@@ -28,7 +28,7 @@ variables:
     value: Pipeline for MNIST Project
     # Repository url for the IAC repo
   - name: IAC-REPOSITORY-URL
-    value:  https://github.com/ai-factory-azure/iac-arm 
+    value:  https://github.com/ai-factory-azure/templates-iac 
     # IAC Branch for creating the pipeline
   - name: IAC-BRANCH
     value:  main    
