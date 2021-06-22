@@ -87,6 +87,6 @@ jobs:
   #   displayName: 'gh login'
 
   - bash:
-      gh repo create $(PROJECT-NAME) -p https://github.com/ai-factory-azure/batch-basic --private --confirm
+      gh repo create $(PROJECT-NAME) -p ai-factory-azure/batch-basic --private --confirm
     displayName: 'Create git repo from template'
       
