@@ -30,6 +30,10 @@ jobs:
   - bash: 
       echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_GITHUB_PAT]$(AZURE-DEVOPS-EXT-GITHUB-PAT)'
     displayName: Set Github PAT variable value
+  
+  - bash: 
+      echo '##vso[task.setvariable variable=GITHUB_TOKEN]$(AZURE-DEVOPS-EXT-GITHUB-PAT)'
+    displayName: Set Github PAT for CLI
 
   - bash: 
       echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY]$(AZURE-RM-SERVICE-PRINCIPAL-KEY-DEV)'
@@ -77,3 +81,8 @@ jobs:
       sudo apt update
       sudo apt install gh
     displayName: 'Install gh' 
+
+  - bash:
+      gh auth login
+      gh repo list 'ai-factory-azure'
+    displayName: 'gh login and list'
