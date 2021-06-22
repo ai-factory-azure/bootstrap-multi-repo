@@ -87,6 +87,6 @@ jobs:
   #   displayName: 'gh login'
 
   - bash:
-      gh repo list 'ai-factory-azure'
+      gh repo create $(PROJECT-NAME) -p https://github.com/ai-factory-azure/batch-basic
     displayName: 'gh list'
       
