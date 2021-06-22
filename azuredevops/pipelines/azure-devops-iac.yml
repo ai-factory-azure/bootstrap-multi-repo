@@ -40,12 +40,10 @@ jobs:
                                                 --name $(GITHUB-SERVICE-ENDPOINT_NAME) 
                                                 --org $(System.TeamFoundationCollectionUri)
                                                 --project $(PROJECT-NAME)
-      # az devops service-endpoint update --id $GITHUB_CONNECTION_ID --enable-for-all
-      # az devops service-endpoint update --id --enable-for-all true      
     displayName: 'Create Github Service Endpoint'
   
   - bash:
-      az devops service-endpoint update --id $(az devops service-endpoint list --organization https://dev.azure.com/ai-factory-azure --project 'testproject100' -o table |grep Github-Service-Endpoint|cut -d" " -f1) --enable-for-all --organization https://dev.azure.com/ai-factory-azure --project 'testproject100'
+      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT_NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(PROJECT-NAME)
     displayName: 'Update Service Endpoint'
 
   # - bash:
