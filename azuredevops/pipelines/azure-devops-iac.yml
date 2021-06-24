@@ -5,7 +5,7 @@ variables:
 - group: bootstrap-variables-kv
 - template: project-variables.yml
 - name: ADO-PROJECT-NAME
-  value: $(PROJECT-NAME) 
+  value: Project-$(PROJECT-NAME)-Controller 
 
 jobs:
 - job: Linux
@@ -22,7 +22,7 @@ jobs:
     displayName: 'Login Azure DevOps Extension'
   
   - bash:
-      az devops project create --name Project-$(ADO-PROJECT-NAME)-Controller --organization $(System.TeamFoundationCollectionUri)
+      az devops project create --name $(ADO-PROJECT-NAME) --organization $(System.TeamFoundationCollectionUri)
     continueOnError: true    
     displayName: 'Create a new project'
 
