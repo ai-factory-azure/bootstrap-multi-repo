@@ -4,7 +4,7 @@ variables:
 # Azure DevOps variables
     # Name for the Azure DevOps project
   - name: PROJECT-NAME
-    value: MNIST01
+    value: mnist02
 
 # Azure Variables
     # Name for the Azure Service connection endpoint
@@ -22,7 +22,7 @@ variables:
 # Pipeline variables
     # Name for the Infrastructure as Code pipeline
   - name: IAC-PIPELINE-NAME
-    value: MNIST-IAC   
+    value: mnist-iac   
     # Description for the IAC pipeline
   - name: IAC-PIPELINE-DESCRIPTION
     value: Pipeline for MNIST Project
