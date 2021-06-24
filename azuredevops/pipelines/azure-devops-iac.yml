@@ -4,6 +4,8 @@ trigger:
 variables:
 - group: bootstrap-variables-kv
 - template: project-variables.yml
+- name: ADO-PROJECT-NAME
+  value: $(PROJECT-NAME) 
 
 jobs:
 - job: Linux
@@ -20,11 +22,11 @@ jobs:
     displayName: 'Login Azure DevOps Extension'
   
   - bash:
-      az devops project create --name Project-$(PROJECT-NAME)-Controller --organization $(System.TeamFoundationCollectionUri)
+      az devops project create --name Project-$(ADO-PROJECT-NAME)-Controller --organization $(System.TeamFoundationCollectionUri)
     continueOnError: true    
     displayName: 'Create a new project'
 
-  - bash: az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(PROJECT-NAME) --use-git-aliases true
+  - bash: az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(ADO-PROJECT-NAME) --use-git-aliases true
     displayName: 'Set default Azure DevOps organization and project'
 
   - bash: 
@@ -43,11 +45,11 @@ jobs:
       az devops service-endpoint github create  --github-url $(GITHUB-ORG-URL) 
                                                 --name $(GITHUB-SERVICE-ENDPOINT_NAME) 
                                                 --org $(System.TeamFoundationCollectionUri)
-                                                --project $(PROJECT-NAME)
+                                                --project $(ADO-PROJECT-NAME)
     displayName: 'Create Github Service Endpoint'
   
   - bash:
-      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT_NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(PROJECT-NAME)
+      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT_NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
     displayName: 'Update Service Endpoint'
 
   - bash:
@@ -57,11 +59,11 @@ jobs:
                                           --azure-rm-tenant-id $(AZURE-RM-TENANT-ID)
                                           --name $(AZURE-SERVICE-ENDPOINT-NAME)
                                           --org $(System.TeamFoundationCollectionUri) 
-                                          --project $(PROJECT-NAME)
+                                          --project $(ADO-PROJECT-NAME)
     displayName: 'Create Azure Service Connection'
 
   - bash:
-      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(PROJECT-NAME)
+      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
     displayName: 'Update endpoint'
 
   - bash:
@@ -70,9 +72,9 @@ jobs:
                           --repository $(IAC-REPOSITORY-URL)
                           --branch $(IAC-BRANCH)
                           --yml-path $(IAC-YML-PATH)
-                          --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT_NAME)|cut -d" " -f1)
+                          --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT_NAME)|cut -d" " -f1)
                           --org $(System.TeamFoundationCollectionUri) 
-                          --project $(PROJECT-NAME)                       
+                          --project $(ADO-PROJECT-NAME)                       
     displayName: 'Create Pipeline from YAML'
     
   - bash:
