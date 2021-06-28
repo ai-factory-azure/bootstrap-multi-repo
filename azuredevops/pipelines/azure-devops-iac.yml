@@ -85,7 +85,7 @@ jobs:
     displayName: 'Install gh' 
 
   - bash:
-      gh repo create ai-factory-azure/Project-$(PROJECT-NAME)-Code -p https://github.com/ai-factory-azure/batch-basic --private --confirm
+      gh repo create ai-factory-azure/project-$(PROJECT-NAME)-code -p https://github.com/ai-factory-azure/batch-basic --private --confirm
     continueOnError: true
     displayName: 'Create git repo from template'
       
