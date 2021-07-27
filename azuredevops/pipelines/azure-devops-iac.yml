@@ -1,5 +1,5 @@
 trigger:
-- azure-devops-setup
+- main
 
 variables:
 - group: bootstrap-variables-kv
