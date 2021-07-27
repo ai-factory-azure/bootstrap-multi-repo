@@ -49,7 +49,7 @@ jobs:
     displayName: 'Create Github Service Endpoint'
   
   - bash:
-      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT_NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
+      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
     displayName: 'Update Service Endpoint'
 
   - bash:
