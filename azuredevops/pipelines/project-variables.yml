@@ -4,7 +4,7 @@ variables:
 # Azure DevOps variables
     # Name for the Azure DevOps project
   - name: PROJECT-NAME
-    value: mnist100
+    value: mnist101
 
 # Azure Variables
     # Name for the Azure Service connection endpoint
@@ -16,9 +16,23 @@ variables:
   - name: GITHUB-ORG-URL
     value: https://github.com/ai-factory-azure
     # Name for the Github Service connection endpoint
-  - name: GITHUB-SERVICE-ENDPOINT_NAME
+  - name: GITHUB-SERVICE-ENDPOINT-NAME
     value: Github-Service-Endpoint
+    # URL for the code template
+    # for batch & tabular, choose https://github.com/ai-factory-azure/project-template-tabular-batch-code
+    # for batch & file, choose https://github.com/ai-factory-azure/project-template-file-batch-code
+    # for realtime & tabular, choose https://github.com/ai-factory-azure/project-template-tabular-realtime-code
+    # for realtime & batch, choose https://github.com/ai-factory-azure/project-template-file-realtime-code
+  - name: CODE-TEMPLATE
+    value: https://github.com/ai-factory-azure/project-template-file-batch-code
 
+    # URL for the controller template
+    # for batch & tabular, choose https://github.com/ai-factory-azure/project-template-tabular-batch-controller
+    # for batch & file, choose https://github.com/ai-factory-azure/project-template-file-batch-controller
+    # for realtime & tabular, choose https://github.com/ai-factory-azure/project-template-tabular-realtime-controller
+    # for realtime & batch, choose https://github.com/ai-factory-azure/project-template-file-realtime-controller
+  - name: CONTROLLER-TEMPLATE
+    value: https://github.com/ai-factory-azure/project-template-file-batch-controller
 # Pipeline variables
     # Name for the Infrastructure as Code pipeline
   - name: IAC-PIPELINE-NAME
@@ -27,7 +41,7 @@ variables:
   - name: IAC-PIPELINE-DESCRIPTION
     value: Pipeline for MNIST Project
     # Repository url for the IAC repo
-  - name: IAC-REPOSITORY-URL
+  - name: IAC-TEMPLATE
     value:  https://github.com/ai-factory-azure/templates-iac 
     # IAC Branch for creating the pipeline
   - name: IAC-BRANCH
