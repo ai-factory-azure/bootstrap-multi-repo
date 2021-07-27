@@ -4,7 +4,7 @@ variables:
 # Azure DevOps variables
     # Name for the Azure DevOps project
   - name: PROJECT-NAME
-    value: mnist103
+    value: mnist104
 
 # Azure Variables
     # Name for the Azure Service connection endpoint
@@ -49,3 +49,29 @@ variables:
     # Pipeline YML path
   - name: IAC-YML-PATH
     value: pipelines/iac-create-environment-pipeline-arm.yml
+
+    # Name for the model training pipeline
+  - name: MODEL-TRAINING-PIPELINE-NAME
+    value: mnist-training   
+    # Description for the pipeline
+  - name: MODEL-TRAINING-PIPELINE-DESCRIPTION
+    value: Training Pipeline for MNIST Project
+    # Branch for creating the pipeline
+  - name: MODEL-TRAINING-BRANCH
+    value:  main    
+    # Pipeline YML path
+  - name: MODEL-TRAINING-YML-PATH
+    value: devops-pipelines/deploy-model-batch-scoring.yml
+
+    # Name for the batch scoring pipeline
+  - name: BATCH-SCORING-PIPELINE-NAME
+    value: mnist-batch-scoring   
+    # Description for the pipeline
+  - name: BATCH-SCORING-PIPELINE-DESCRIPTION
+    value: Batch scoring Pipeline for MNIST Project
+    # Branch for creating the pipeline
+  - name: BATCH-SCORING-BRANCH
+    value:  main    
+    # Pipeline YML path
+  - name: BATCH-SCORING-YML-PATH
+    value: devops-pipelines/deploy-model-batch-scoring.yml

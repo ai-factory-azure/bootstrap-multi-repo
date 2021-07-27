@@ -94,9 +94,32 @@ jobs:
                           --repository $(GITHUB-ORG-URL)/project-$(PROJECT-NAME)-iac
                           --branch $(IAC-BRANCH)
                           --yml-path $(IAC-YML-PATH)
-                          --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
+                          --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
                           --skip-first-run true                    
-    displayName: 'Create Pipeline from YAML'
+    displayName: 'Create IAC Pipeline from YAML'
 
+  - bash:
+      az pipelines create --name $(MODEL-TRAINING-PIPELINE-NAME)
+                          --description 'Pipeline for Model training'
+                          --repository $(GITHUB-ORG-URL)/project-$(PROJECT-NAME)-controller
+                          --branch $(MODEL-TRAINING-BRANCH)
+                          --yml-path $(MODEL-TRAINING-YML-PATH)
+                          --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
+                          --org $(System.TeamFoundationCollectionUri) 
+                          --project $(ADO-PROJECT-NAME)   
+                          --skip-first-run true                    
+    displayName: 'Create Training Pipeline from YAML'
+
+  - bash:
+      az pipelines create --name $(BATCH-SCORING-PIPELINE-NAME)
+                          --description 'Pipeline for Model training'
+                          --repository $(GITHUB-ORG-URL)/project-$(PROJECT-NAME)-controller
+                          --branch $(BATCH-SCORING-BRANCH)
+                          --yml-path $(BATCH-SCORING-YML-PATH)
+                          --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
+                          --org $(System.TeamFoundationCollectionUri) 
+                          --project $(ADO-PROJECT-NAME)   
+                          --skip-first-run true                    
+    displayName: 'Create Batch scoring Pipeline from YAML'
