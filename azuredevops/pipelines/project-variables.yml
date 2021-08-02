@@ -4,7 +4,7 @@ variables:
 # Azure DevOps variables
     # Name for the Azure DevOps project
   - name: PROJECT-NAME
-    value: mnist100
+    value: mnist200
 
 # Azure Variables
     # Name for the Azure Service connection endpoint
@@ -61,7 +61,7 @@ variables:
     value:  main    
     # Pipeline YML path
   - name: MODEL-TRAINING-YML-PATH
-    value: devops-pipelines/deploy-model-batch-scoring.yml
+    value: devops-pipelines/deploy-model-training-pipeline.yml
 
     # Name for the batch scoring pipeline
   - name: BATCH-SCORING-PIPELINE-NAME
