@@ -84,6 +84,15 @@ jobs:
     displayName: 'Create git repo for the controller from template'
 
   - bash:
+      git clone ai-factory-azure/project-$(PROJECT-NAME)-controller
+      cd ai-factory-azure/project-$(PROJECT-NAME)-controller/devops-pipelines
+      sed -i 's/project-template-file-batch-code/$(PROJECT-NAME)/' * 
+      git commit -am "modified yml to reflect new repo name"
+      git push 
+    continueOnError: true
+    displayName: 'Pull git repo controller and modify yml to reflect new repo name'  
+
+  - bash:
       gh repo create ai-factory-azure/project-$(PROJECT-NAME)-iac -p $(IAC-TEMPLATE) --private --confirm
     continueOnError: true
     displayName: 'Create git repo for IAC from template'
