@@ -17,7 +17,7 @@ variables:
     value: https://github.com/ai-factory-azure
     # Name for the Github Service connection endpoint
   - name: GITHUB-SERVICE-ENDPOINT-NAME
-    value: Github-Service-Endpoint
+    value: Github-Service-Endpoint-v2
     # URL for the code template
     # for batch & tabular, choose https://github.com/ai-factory-azure/project-template-tabular-batch-code
     # for batch & file, choose https://github.com/ai-factory-azure/project-template-file-batch-code
