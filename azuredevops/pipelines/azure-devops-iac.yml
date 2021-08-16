@@ -86,7 +86,7 @@ jobs:
     displayName: 'Create git repo for the controller from template'
 
   - bash:
-      git clone ai-factory-azure/project-$(PROJECT-NAME)-controller
+      gh repo clone ai-factory-azure/project-$(PROJECT-NAME)-controller
       cd ai-factory-azure/project-$(PROJECT-NAME)-controller/devops-pipelines
       sed -i 's/project-template-file-batch-code/$(PROJECT-NAME)/' * 
       git commit -am "modified yml to reflect new repo name"
