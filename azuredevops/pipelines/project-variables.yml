@@ -9,7 +9,7 @@ variables:
 # Azure Variables
     # Name for the Azure Service connection endpoint
   - name: AZURE-SERVICE-ENDPOINT-NAME
-    value: Azure-ARM-Dev
+    value: Azure-ARM-Dev-v2
 
 # Github Variables
     # Org URL for the github org where the github project is / will be hosted
