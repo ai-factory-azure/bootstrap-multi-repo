@@ -9,7 +9,7 @@ variables:
 # Azure Variables
     # Name for the Azure Service connection endpoint
   - name: AZURE-SERVICE-ENDPOINT-NAME
-    value: Azure-ARM-Dev-v2
+    value: Azure-ARM-Dev
 
 # Github Variables
     # Org URL for the github org where the github project is / will be hosted
@@ -17,7 +17,7 @@ variables:
     value: https://github.com/ai-factory-azure
     # Name for the Github Service connection endpoint
   - name: GITHUB-SERVICE-ENDPOINT-NAME
-    value: Github-Service-Endpoint-v2
+    value: Github-Service-Endpoint
     # URL for the code template
     # for batch & tabular, choose https://github.com/ai-factory-azure/project-template-tabular-batch-code
     # for batch & file, choose https://github.com/ai-factory-azure/project-template-file-batch-code
