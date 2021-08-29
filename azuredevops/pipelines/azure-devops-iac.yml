@@ -90,10 +90,13 @@ jobs:
 
   - bash:
       git clone https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller
+    continueOnError: true  
+    displayName: 'Pull git repo controller and modify yml to reflect new repo name' 
+
+  - bash:
       git remote set-url origin https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller
     continueOnError: true  
-    displayName: 'Pull git repo controller and modify yml to reflect new repo name'  
-    
+
   - bash:
       cd project-$(PROJECT-NAME)-controller/devops-pipelines
     continueOnError: true  
