@@ -107,7 +107,7 @@ jobs:
       sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-training-pipeline.yml
     continueOnError: true  
   - bash:
-      git commit -am "modified yml to reflect new repo name"
+      git commit -am "modified ymls to reflect new repo name"s
     continueOnError: true  
   - bash:
       git push 
