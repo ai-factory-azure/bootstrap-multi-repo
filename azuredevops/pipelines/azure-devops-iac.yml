@@ -99,6 +99,9 @@ jobs:
 
   - bash:
       cd project-$(PROJECT-NAME)-controller/devops-pipelines
+    continueOnError: true 
+  - bash:
+      ls
     continueOnError: true  
   - bash:
       sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-batch-scoring.yml
