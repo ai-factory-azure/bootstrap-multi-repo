@@ -89,22 +89,16 @@ jobs:
     displayName: 'Create git repo for the controller from template'
 
   - bash:
-      git clone https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller
-    continueOnError: true  
-    displayName: 'Pull git repo controller and modify yml to reflect new repo name' 
-
-  - bash:
-      git remote set-url origin https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller
-    continueOnError: true  
-
-  - bash:
-      (cd project-$(PROJECT-NAME)-controller/devops-pipelines; 
-      ls;
+      (git clone https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
+      git remote set-url origin https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
+      cd project-$(PROJECT-NAME)-controller/devops-pipelines;
       sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-batch-scoring.yml;
       sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-training-pipeline.yml;
       git commit -am "modified ymls to reflect new repo name";
       git push) &
-    continueOnError: true
+
+    continueOnError: true  
+    displayName: 'Pull git repo controller and modify yml to reflect new repo name' 
 
   - bash:
       gh repo create ai-factory-azure/project-$(PROJECT-NAME)-iac -p $(IAC-TEMPLATE) --private --confirm
