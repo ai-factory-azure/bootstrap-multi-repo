@@ -107,6 +107,11 @@ jobs:
     continueOnError: true
 
   - bash:
+      gh repo create ai-factory-azure/project-$(PROJECT-NAME)-iac -p $(IAC-TEMPLATE) --private --confirm
+    continueOnError: true
+    displayName: 'Create git repo for IAC from template'
+
+  - bash:
       az pipelines create --name $(IAC-PIPELINE-NAME)
                           --description 'Pipeline for IAC'
                           --repository $(GITHUB-ORG-URL)/project-$(PROJECT-NAME)-iac
