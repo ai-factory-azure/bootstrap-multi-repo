@@ -98,12 +98,14 @@ jobs:
     continueOnError: true  
 
   - bash:
+      #!/bin/bash
       cd project-$(PROJECT-NAME)-controller/devops-pipelines
-      yes "" | ls
-      yes "" | sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-batch-scoring.yml
-      yes "" | sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-training-pipeline.yml
-      yes "" | git commit -am "modified ymls to reflect new repo name"s
-      yes "" | git push 
+      ls
+      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-batch-scoring.yml
+      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-training-pipeline.yml
+      git commit -am "modified ymls to reflect new repo name"s
+      git push 
+      exec bash
     continueOnError: true
 
   - bash:
