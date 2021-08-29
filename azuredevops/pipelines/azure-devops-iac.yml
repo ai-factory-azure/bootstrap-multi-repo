@@ -101,7 +101,10 @@ jobs:
       cd project-$(PROJECT-NAME)-controller/devops-pipelines
     continueOnError: true  
   - bash:
-      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' * 
+      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-batch-scoring.yml
+    continueOnError: true
+  - bash:
+      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-training-pipeline.yml
     continueOnError: true  
   - bash:
       git commit -am "modified yml to reflect new repo name"
