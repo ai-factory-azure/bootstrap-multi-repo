@@ -14,4 +14,4 @@ This is a bootstrapping repo for AI Factory. This repo performs the following ta
     - Training pipeline
     - Scoring pipeline
 
-
+Instructions for the setup of this repo can be found on the [getting started](/getting_started.md) page
