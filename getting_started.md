@@ -13,7 +13,13 @@ This repo requires a number of secrets to create various artefacts in Azure, Azu
 
 ## 2. Github Setup
 
-Clone this repo in your Github organization
+Clone the following repos in your Github organization:
+
+1. [Bootstrap](https://github.com/ai-factory-azure/bootstrap)
+2. [MLOps templates](ai-factory-azure/templates-mlops)
+3. [Code template](https://github.com/ai-factory-azure/project-template-file-batch-code)
+4. [Controller template](https://github.com/ai-factory-azure/project-template-file-batch-controller)
+5. [Infrastructure as Code template](https://github.com/ai-factory-azure/templates-iac)
 
 ## 3. Setting up Azure DevOps
 
