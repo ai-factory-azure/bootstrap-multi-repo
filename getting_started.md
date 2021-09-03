@@ -33,7 +33,7 @@ Create a new pipeline in Azure DevOps as per the steps below:
 
 1. Pipelines->New Pipeline -> Github (YAML)
 2. Choose the repo you created in step 2 (If your repo is not visible in the default view, then click on the dropdown under Select a repository and choose "All repositories")
-3. Choose "Existing Azure Pipelines YAML File" option and then select the file named "azure-devops-iac.yml" in the azuredevops/pipelines folder
+3. Choose "Existing Azure Pipelines YAML File" option and then select the file "/azuredevops/pipelines/azure-devops-iac.yml"
 
 ## 6. Update parameters for the pipeline
 
