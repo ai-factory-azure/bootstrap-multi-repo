@@ -89,8 +89,8 @@ jobs:
     displayName: 'Create git repo for the controller from template'
 
   - bash:
-      (git clone https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
-      git remote set-url origin https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
+      (git clone https://$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
+      git remote set-url origin https://$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
       cd project-$(PROJECT-NAME)-controller/devops-pipelines;
       sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-batch-scoring.yml;
       sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-training-pipeline.yml;
