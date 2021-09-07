@@ -13,6 +13,8 @@ This repo requires a number of secrets to create various artefacts in Azure, Azu
 
 ## 2. Github Setup
 
+### 2.1 Github Repos
+
 Create the following repos in your Github organization via "Use this template" capability in Github (preferably use the same repo names):
 
 1. [Bootstrap](https://github.com/ai-factory-azure/bootstrap)
@@ -21,7 +23,11 @@ Create the following repos in your Github organization via "Use this template" c
 4. [Controller template](https://github.com/ai-factory-azure/project-template-file-batch-controller)
 5. [Infrastructure as Code template](https://github.com/ai-factory-azure/templates-iac)
 
-Under the settings for repositores 3,4 and 5, tick the box "Template Repository" to make them template repositories
+Replace "ai-factory-azure" with the name of your Github org in the files "deploy-model-training-pipeline.yml" and "deploy-model-batch-scoring.yml" in the Controller template created above
+
+### 2.1 Github Settings
+
+Under the settings for repositores 3,4 and 5 created above, tick the box "Template Repository" to make them template repositories
 
 ![image](https://user-images.githubusercontent.com/26466075/132330317-528a2e71-7371-46c8-870e-10349a9fefcc.png)
 
