@@ -13,7 +13,7 @@ This repo requires a number of secrets to create various artefacts in Azure, Azu
 
 ## 2. Github Setup
 
-Create the following repos in your Github organization via "Use this template" capability in Github:
+Create the following repos in your Github organization via "Use this template" capability in Github (preferably use the same repo names):
 
 1. [Bootstrap](https://github.com/ai-factory-azure/bootstrap)
 2. [MLOps templates](https://github.com/ai-factory-azure/templates-mlops)
