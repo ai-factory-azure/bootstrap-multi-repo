@@ -74,17 +74,17 @@ jobs:
     displayName: 'Install gh' 
 
   - bash:
-      gh repo create ai-factory-azure/project-$(PROJECT-NAME)-code -p $(CODE-TEMPLATE) --private --confirm
+      gh repo create $(GITHUB-ORG-NAME)/project-$(PROJECT-NAME)-code -p $(CODE-TEMPLATE) --private --confirm
     continueOnError: true
     displayName: 'Create git repo for ml code from template'
 
   - bash:
-      gh repo create ai-factory-azure/project-$(PROJECT-NAME)-controller -p $(CONTROLLER-TEMPLATE) --private --confirm
+      gh repo create $(GITHUB-ORG-NAME)/project-$(PROJECT-NAME)-controller -p $(CONTROLLER-TEMPLATE) --private --confirm
     continueOnError: true
     displayName: 'Create git repo for the controller from template'
 
   - bash:
-      gh repo create ai-factory-azure/project-$(PROJECT-NAME)-iac -p $(IAC-TEMPLATE) --private --confirm
+      gh repo create $(GITHUB-ORG-NAME)/project-$(PROJECT-NAME)-iac -p $(IAC-TEMPLATE) --private --confirm
     continueOnError: true
     displayName: 'Create git repo for IAC from template'
 
