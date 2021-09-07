@@ -27,11 +27,17 @@ You'll use Azure DevOps for running the multi-stage pipeline with build, model t
 
 If you already have an Azure DevOps organization, or once you've created an organisation, create a new project using the guide at [Create a project in Azure DevOps and TFS](https://docs.microsoft.com/en-us/azure/devops/organizations/projects/create-project?view=azure-devops).
 
-## 4. Create a Variable Group for your Pipeline
+## 4. Set up for the bootstrap Pipeline
 
 Create a variable group named **`bootstrap-variables-kv`**. The YAML pipeline definitions in this repository refer to this variable group by name.
 
 The "Link secrets from an Azure key vault as variables" button should be set and the variable group should be linked to the key vault created in step 1. Once it it has been linked, all the secrets created above should be added as variables in this variable group
+
+Go to the Azure DevOps organization's settings and under permissions, grant "Create new projects" permission to the build service for the new project. The name of this account should be "<azure devops project name> Build Service"
+  
+![image](https://user-images.githubusercontent.com/26466075/132328747-02b0011f-aaa6-4a85-b51c-8e9feeed14d4.png)
+
+![image](https://user-images.githubusercontent.com/26466075/132328799-55d9cbb4-520f-4890-9753-240fbae6a5d1.png)
 
 ## 5. Create a new Pipeline in Azure DevOps
 
