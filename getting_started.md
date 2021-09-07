@@ -33,7 +33,7 @@ Create a variable group named **`bootstrap-variables-kv`**. The YAML pipeline de
 
 The "Link secrets from an Azure key vault as variables" button should be set and the variable group should be linked to the key vault created in step 1. Once it it has been linked, all the secrets created above should be added as variables in this variable group
 
-Go to the Azure DevOps organization's settings and under permissions, grant "Create new projects" permission to the build service for the new project. The name of this account should be "<azure devops project name> Build Service"
+Go to the Azure DevOps organization's settings and grant "Create new projects" permission to the build service for the new project. The name of this account should be "<azure devops project name> Build Service"
   
 ![image](https://user-images.githubusercontent.com/26466075/132328747-02b0011f-aaa6-4a85-b51c-8e9feeed14d4.png)
 
