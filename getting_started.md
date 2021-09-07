@@ -21,6 +21,11 @@ Create the following repos in your Github organization via "Use this template" c
 4. [Controller template](https://github.com/ai-factory-azure/project-template-file-batch-controller)
 5. [Infrastructure as Code template](https://github.com/ai-factory-azure/templates-iac)
 
+Under the settings for repositores 3,4 and 5, tick the box "Template Repository" to make them template repositories
+
+![image](https://user-images.githubusercontent.com/26466075/132330317-528a2e71-7371-46c8-870e-10349a9fefcc.png)
+
+
 ## 3. Setting up Azure DevOps
 
 You'll use Azure DevOps for running the multi-stage pipeline with build, model training, and scoring service release stages. If you don't already have an Azure DevOps organization, create one by following the instructions at [Quickstart: Create an organization or project collection](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/create-organization?view=azure-devops).
