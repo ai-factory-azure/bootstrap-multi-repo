@@ -4,7 +4,7 @@ variables:
 # Azure DevOps variables
     # Name for the Azure DevOps project
   - name: PROJECT-NAME
-    value: mnist08
+    value: mnist00005
 
 # Azure Variables
     # Name for the Azure Service connection endpoint
@@ -12,6 +12,9 @@ variables:
     value: Azure-ARM-Dev
 
 # Github Variables
+    # Org name of the github org
+  - name: GITHUB-ORG-NAME
+    value: ai-factory-azure
     # Org URL for the github org where the github project is / will be hosted
   - name: GITHUB-ORG-URL
     value: https://github.com/ai-factory-azure
