@@ -89,8 +89,7 @@ jobs:
     displayName: 'Create git repo for the controller from template'
 
   - bash:
-      (cwd=$(pwd);
-      echo $(cwd);
+      (echo pwd;
       git clone https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
       git remote set-url origin https://manu-kanwarpal:$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
       cd project-$(PROJECT-NAME)-controller/devops-pipelines;
