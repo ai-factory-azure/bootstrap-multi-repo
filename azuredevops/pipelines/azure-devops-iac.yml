@@ -55,7 +55,7 @@ jobs:
   - bash:
       az devops service-endpoint azurerm create --azure-rm-service-principal-id $(AZURE-RM-SERVICE-PRINCIPAL-ID-DEV)
                                           --azure-rm-subscription-id $(AZURE-RM-SUBSCRIPTION-ID-DEV)
-                                          --azure-rm-subscription-name $(AZURE-RM-SUBSCRIPTION-NAME-DEV)
+                                          --azure-rm-subscription-name "$(AZURE-RM-SUBSCRIPTION-NAME-DEV)"
                                           --azure-rm-tenant-id $(AZURE-RM-TENANT-ID)
                                           --name $(AZURE-SERVICE-ENDPOINT-NAME)
                                           --org $(System.TeamFoundationCollectionUri) 
