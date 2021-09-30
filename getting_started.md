@@ -14,6 +14,8 @@ This repo requires a number of secrets to create various artefacts in Azure, Azu
 After adding all the settings, your Key Vault Secrets should look like this:
 ![image](https://user-images.githubusercontent.com/525867/135234077-af139012-55fc-4bc7-83a3-9aff2d727478.png)
 
+NOTE: If your subscription name has a space in it, put quotes `""` around your subscription name for the AZURE-RM-SUBSCRIPTION-NAME-DEV secret. Else, the pipeline will fail.
+
 ## 2. GitHub Setup
 
 ### 2.1 GitHub Repos
