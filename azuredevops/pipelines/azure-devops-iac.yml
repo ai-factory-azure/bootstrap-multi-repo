@@ -46,6 +46,7 @@ jobs:
                                                 --name $(GITHUB-SERVICE-ENDPOINT-NAME) 
                                                 --org $(System.TeamFoundationCollectionUri)
                                                 --project $(ADO-PROJECT-NAME)
+    continueOnError: true
     displayName: 'Create Github Service Endpoint'
   
   - bash:
