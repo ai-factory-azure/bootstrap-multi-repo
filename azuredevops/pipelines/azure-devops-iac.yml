@@ -90,13 +90,13 @@ jobs:
     continueOnError: true
     displayName: 'Create git repo for IAC from template'
 
-  - bash:
-      az pipelines create --name $(IAC-PIPELINE-NAME)
-    continueOnError: true               
-    displayName: 'Create blank IAC Pipeline'
+  - bash: 
+      az pipelines delete --name $(IAC-PIPELINE-NAME)
+    continueOnError: true
+    displayName: 'Delete IAC Pipeline if it exists'
 
   - bash:
-      az pipelines update --name $(IAC-PIPELINE-NAME)
+      az pipelines create --name $(IAC-PIPELINE-NAME)
                           --description 'Pipeline for IAC'
                           --repository $(GITHUB-ORG-URL)/project-$(PROJECT-NAME)-iac
                           --branch $(IAC-BRANCH)
@@ -104,8 +104,8 @@ jobs:
                           --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
-                          --skip-first-run true                    
-    displayName: 'Update IAC Pipeline using YAML'
+                          --skip-first-run true
+    displayName: 'Create IAC Pipeline using YAML'
 
   - bash:
       az pipelines create --name $(MODEL-TRAINING-PIPELINE-NAME)
