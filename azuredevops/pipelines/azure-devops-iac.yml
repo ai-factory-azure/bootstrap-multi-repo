@@ -91,17 +91,9 @@ jobs:
     displayName: 'Create git repo for IAC from template'
 
   - bash: 
-      az pipelines list --project $(ADO-PROJECT-NAME) -o table
-    displayName: 'List pipelines'
-
-  - bash:
-      az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(IAC-PIPELINE-NAME)|cut -d" " -f1
-    displayName: 'Get name of pipeline'
-
-  - bash: 
-      az pipelines delete --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
+      az pipelines delete --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(IAC-PIPELINE-NAME)|cut -d" " -f1)
     continueOnError: true
-    displayName: 'Delete'  
+    displayName: 'Delete IAC Pipeline if exists'
 
   - bash:
       az pipelines create --name $(IAC-PIPELINE-NAME)
@@ -113,7 +105,6 @@ jobs:
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
                           --skip-first-run true
-    continueOnError: true
     displayName: 'Create IAC Pipeline using YAML'
 
   - bash:
