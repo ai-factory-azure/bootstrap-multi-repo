@@ -46,7 +46,6 @@ jobs:
                                                 --name $(GITHUB-SERVICE-ENDPOINT-NAME) 
                                                 --org $(System.TeamFoundationCollectionUri)
                                                 --project $(ADO-PROJECT-NAME)
-    continueOnError: true
     displayName: 'Create Github Service Endpoint'
   
   - bash:
@@ -91,9 +90,13 @@ jobs:
     displayName: 'Create git repo for IAC from template'
 
   - bash: 
-      az pipelines delete --name $(IAC-PIPELINE-NAME)
+      az pipelines list --project $(ADO-PROJECT-NAME) -o table
+    displayName: 'List pipelines'
+
+  - bash: 
+      az pipelines delete --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
     continueOnError: true
-    displayName: 'Delete IAC Pipeline if it exists'
+    displayName: 'Delete'  
 
   - bash:
       az pipelines create --name $(IAC-PIPELINE-NAME)
@@ -105,6 +108,7 @@ jobs:
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
                           --skip-first-run true
+    continueOnError: true
     displayName: 'Create IAC Pipeline using YAML'
 
   - bash:
@@ -116,7 +120,7 @@ jobs:
                           --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
-                          --skip-first-run true                    
+                          --skip-first-run true        
     displayName: 'Create Training Pipeline from YAML'
 
   - bash:
