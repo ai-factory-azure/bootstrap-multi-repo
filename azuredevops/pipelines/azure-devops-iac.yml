@@ -94,6 +94,10 @@ jobs:
       az pipelines list --project $(ADO-PROJECT-NAME) -o table
     displayName: 'List pipelines'
 
+  - bash:
+      az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(IAC-PIPELINE-NAME)|cut -d" " -f1
+    displayName: 'Get name of pipeline'
+
   - bash: 
       az pipelines delete --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
     continueOnError: true
