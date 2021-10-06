@@ -61,6 +61,7 @@ jobs:
                                           --name $(AZURE-SERVICE-ENDPOINT-NAME)
                                           --org $(System.TeamFoundationCollectionUri) 
                                           --project $(ADO-PROJECT-NAME)
+    continueOnError: true
     displayName: 'Create Azure Service Connection'
 
   - bash:
