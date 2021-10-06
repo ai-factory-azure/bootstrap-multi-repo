@@ -23,7 +23,7 @@ jobs:
   
   - bash:
       az devops project create --name $(ADO-PROJECT-NAME) --organization $(System.TeamFoundationCollectionUri)
-    continueOnError: true    
+    continueOnError: true
     displayName: 'Create a new project'
 
   - bash: az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(ADO-PROJECT-NAME) --use-git-aliases true
@@ -46,6 +46,7 @@ jobs:
                                                 --name $(GITHUB-SERVICE-ENDPOINT-NAME) 
                                                 --org $(System.TeamFoundationCollectionUri)
                                                 --project $(ADO-PROJECT-NAME)
+    continueOnError: true
     displayName: 'Create Github Service Endpoint'
   
   - bash:
