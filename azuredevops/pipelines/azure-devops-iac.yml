@@ -41,17 +41,20 @@ jobs:
       echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY]$(AZURE-RM-SERVICE-PRINCIPAL-KEY-DEV)'
     displayName: Set Azure Service Principal value
 
+  - bash:
+      az devops service-endpoint delete --id $(az devops service-endpoint list 
+                                              --organization $(System.TeamFoundationCollectionUri) 
+                                              --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) 
+    continueOnError: true
+    displayName: 'Delete Service Endpoint if exists'
+
   - bash: 
       az devops service-endpoint github create  --github-url $(GITHUB-ORG-URL) 
                                                 --name $(GITHUB-SERVICE-ENDPOINT-NAME) 
                                                 --org $(System.TeamFoundationCollectionUri)
                                                 --project $(ADO-PROJECT-NAME)
     continueOnError: true
-    displayName: 'Create Github Service Endpoint'
-  
-  - bash:
-      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
-    displayName: 'Update Service Endpoint'
+    displayName: 'Create Github Service Endpoint if doesn't exist'
 
   - bash:
       az devops service-endpoint azurerm create --azure-rm-service-principal-id $(AZURE-RM-SERVICE-PRINCIPAL-ID-DEV)
