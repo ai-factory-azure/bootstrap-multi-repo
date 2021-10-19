@@ -45,6 +45,7 @@ jobs:
       az devops service-endpoint delete --id $(az devops service-endpoint list 
                                               --organization $(System.TeamFoundationCollectionUri) 
                                               --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) 
+                                              --yes
     continueOnError: true
     displayName: 'Delete Service Endpoint if exists'
 
