@@ -54,7 +54,7 @@ jobs:
                                                 --org $(System.TeamFoundationCollectionUri)
                                                 --project $(ADO-PROJECT-NAME)
     continueOnError: true
-    displayName: 'Create Github Service Endpoint if doesn't exist'
+    displayName: 'Create Github Service Endpoint if does not exist'
 
   - bash:
       az devops service-endpoint azurerm create --azure-rm-service-principal-id $(AZURE-RM-SERVICE-PRINCIPAL-ID-DEV)
