@@ -120,10 +120,10 @@ jobs:
   - bash:
       az pipelines delete --id $(az pipelines list 
                           --organization $(System.TeamFoundationCollectionUri) 
-                          --project $(ADO-PROJECT-NAME) -o table |grep $(BATCH-SCORING-PIPELINE-NAME)|cut -d" " -f1) 
+                          --project $(ADO-PROJECT-NAME) -o table |grep $(MODEL-TRAINING-PIPELINE-NAME)|cut -d" " -f1) 
                           --yes
     continueOnError: true
-    displayName: 'Delete Batch Scoring Pipeline if exists'
+    displayName: 'Delete Training Pipeline if exists'
 
   - bash:
       az pipelines create --name $(MODEL-TRAINING-PIPELINE-NAME)
@@ -136,6 +136,14 @@ jobs:
                           --project $(ADO-PROJECT-NAME)   
                           --skip-first-run true        
     displayName: 'Create Training Pipeline from YAML'
+
+  - bash:
+      az pipelines delete --id $(az pipelines list 
+                          --organization $(System.TeamFoundationCollectionUri) 
+                          --project $(ADO-PROJECT-NAME) -o table |grep $(BATCH-SCORING-PIPELINE-NAME)|cut -d" " -f1) 
+                          --yes
+    continueOnError: true
+    displayName: 'Delete Batch Scoring Pipeline if exists'
 
   - bash:
       az pipelines create --name $(BATCH-SCORING-PIPELINE-NAME)
