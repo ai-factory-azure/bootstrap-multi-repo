@@ -58,7 +58,7 @@ jobs:
     displayName: 'Create Github Service Endpoint if does not exist'
 
   - bash:
-      az devops service-endpoint azurerm delete --id $(az devops service-endpoint list 
+      az devops service-endpoint delete --id $(az devops service-endpoint list 
                                               --organization $(System.TeamFoundationCollectionUri) 
                                               --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-RM-SERVICE-PRINCIPAL-ID-DEV)|cut -d" " -f1) 
                                               --yes
