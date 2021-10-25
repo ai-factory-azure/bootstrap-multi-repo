@@ -76,10 +76,6 @@ jobs:
     displayName: 'Create Azure Service Connection'
 
   - bash:
-      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
-    displayName: 'Update endpoint'
-   
-  - bash:
       curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
       echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
       sudo apt update
@@ -101,8 +97,11 @@ jobs:
     continueOnError: true
     displayName: 'Create git repo for IAC from template'
 
-  - bash: 
-      az pipelines delete --yes --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(IAC-PIPELINE-NAME)|cut -d" " -f1) 
+  - bash:
+      az pipelines delete --id $(az pipelines list 
+                          --organization $(System.TeamFoundationCollectionUri) 
+                          --project $(ADO-PROJECT-NAME) -o table |grep $(IAC-PIPELINE-NAME)|cut -d" " -f1) 
+                          --yes
     continueOnError: true
     displayName: 'Delete IAC Pipeline if exists'
 
@@ -118,7 +117,13 @@ jobs:
                           --skip-first-run true
     displayName: 'Create IAC Pipeline using YAML'
 
-
+  - bash:
+      az pipelines delete --id $(az pipelines list 
+                          --organization $(System.TeamFoundationCollectionUri) 
+                          --project $(ADO-PROJECT-NAME) -o table |grep $(BATCH-SCORING-PIPELINE-NAME)|cut -d" " -f1) 
+                          --yes
+    continueOnError: true
+    displayName: 'Delete Batch Scoring Pipeline if exists'
 
   - bash:
       az pipelines create --name $(MODEL-TRAINING-PIPELINE-NAME)
@@ -131,11 +136,6 @@ jobs:
                           --project $(ADO-PROJECT-NAME)   
                           --skip-first-run true        
     displayName: 'Create Training Pipeline from YAML'
-
-  - bash: 
-    az pipelines delete --yes --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(BATCH-SCORING-PIPELINE-NAME)|cut -d" " -f1)
-    continueOnError: true
-    displayName: 'Delete Batch Scoring Pipeline if exists'
 
   - bash:
       az pipelines create --name $(BATCH-SCORING-PIPELINE-NAME)
