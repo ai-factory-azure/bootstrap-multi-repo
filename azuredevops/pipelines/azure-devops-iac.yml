@@ -23,7 +23,7 @@ jobs:
   
   - bash:
       az devops project create --name $(ADO-PROJECT-NAME) --organization $(System.TeamFoundationCollectionUri)
-    continueOnError: true    
+    continueOnError: true
     displayName: 'Create a new project'
 
   - bash: az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(ADO-PROJECT-NAME) --use-git-aliases true
@@ -41,16 +41,29 @@ jobs:
       echo '##vso[task.setvariable variable=AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY]$(AZURE-RM-SERVICE-PRINCIPAL-KEY-DEV)'
     displayName: Set Azure Service Principal value
 
+  - bash:
+      az devops service-endpoint delete --id $(az devops service-endpoint list 
+                                              --organization $(System.TeamFoundationCollectionUri) 
+                                              --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) 
+                                              --yes
+    continueOnError: true
+    displayName: 'Delete Github Service Endpoint if exists'
+
   - bash: 
       az devops service-endpoint github create  --github-url $(GITHUB-ORG-URL) 
                                                 --name $(GITHUB-SERVICE-ENDPOINT-NAME) 
                                                 --org $(System.TeamFoundationCollectionUri)
                                                 --project $(ADO-PROJECT-NAME)
-    displayName: 'Create Github Service Endpoint'
-  
+    continueOnError: true
+    displayName: 'Create Github Service Endpoint if does not exist'
+
   - bash:
-      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
-    displayName: 'Update Service Endpoint'
+      az devops service-endpoint delete --id $(az devops service-endpoint list 
+                                              --organization $(System.TeamFoundationCollectionUri) 
+                                              --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) 
+                                              --yes
+    continueOnError: true
+    displayName: 'Delete Azure Service Connection if exists'  
 
   - bash:
       az devops service-endpoint azurerm create --azure-rm-service-principal-id $(AZURE-RM-SERVICE-PRINCIPAL-ID-DEV)
@@ -62,10 +75,6 @@ jobs:
                                           --project $(ADO-PROJECT-NAME)
     displayName: 'Create Azure Service Connection'
 
-  - bash:
-      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
-    displayName: 'Update endpoint'
-   
   - bash:
       curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
       echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
@@ -89,6 +98,14 @@ jobs:
     displayName: 'Create git repo for IAC from template'
 
   - bash:
+      az pipelines delete --id $(az pipelines list 
+                          --organization $(System.TeamFoundationCollectionUri) 
+                          --project $(ADO-PROJECT-NAME) -o table |grep $(IAC-PIPELINE-NAME)|cut -d" " -f1) 
+                          --yes
+    continueOnError: true
+    displayName: 'Delete IAC Pipeline if exists'
+
+  - bash:
       az pipelines create --name $(IAC-PIPELINE-NAME)
                           --description 'Pipeline for IAC'
                           --repository $(GITHUB-ORG-URL)/project-$(PROJECT-NAME)-iac
@@ -97,8 +114,16 @@ jobs:
                           --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
-                          --skip-first-run true                    
-    displayName: 'Create IAC Pipeline from YAML'
+                          --skip-first-run true
+    displayName: 'Create IAC Pipeline using YAML'
+
+  - bash:
+      az pipelines delete --id $(az pipelines list 
+                          --organization $(System.TeamFoundationCollectionUri) 
+                          --project $(ADO-PROJECT-NAME) -o table |grep $(MODEL-TRAINING-PIPELINE-NAME)|cut -d" " -f1) 
+                          --yes
+    continueOnError: true
+    displayName: 'Delete Training Pipeline if exists'
 
   - bash:
       az pipelines create --name $(MODEL-TRAINING-PIPELINE-NAME)
@@ -109,8 +134,16 @@ jobs:
                           --service-connection $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1)
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
-                          --skip-first-run true                    
+                          --skip-first-run true        
     displayName: 'Create Training Pipeline from YAML'
+
+  - bash:
+      az pipelines delete --id $(az pipelines list 
+                          --organization $(System.TeamFoundationCollectionUri) 
+                          --project $(ADO-PROJECT-NAME) -o table |grep $(BATCH-SCORING-PIPELINE-NAME)|cut -d" " -f1) 
+                          --yes
+    continueOnError: true
+    displayName: 'Delete Batch Scoring Pipeline if exists'
 
   - bash:
       az pipelines create --name $(BATCH-SCORING-PIPELINE-NAME)
@@ -122,4 +155,4 @@ jobs:
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
                           --skip-first-run true                    
-    displayName: 'Create Batch scoring Pipeline from YAML'
+    displayName: 'Create Batch Scoring Pipeline from YAML'
