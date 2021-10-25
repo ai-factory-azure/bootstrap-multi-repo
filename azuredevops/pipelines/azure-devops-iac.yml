@@ -102,7 +102,7 @@ jobs:
     displayName: 'Create git repo for IAC from template'
 
   - bash: 
-      az pipelines delete --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(IAC-PIPELINE-NAME)|cut -d" " -f1)
+      az pipelines delete --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(IAC-PIPELINE-NAME)|cut -d" " -f1) --yes
     continueOnError: true
     displayName: 'Delete IAC Pipeline if exists'
 
@@ -118,6 +118,11 @@ jobs:
                           --skip-first-run true
     displayName: 'Create IAC Pipeline using YAML'
 
+  - bash: 
+    az pipelines delete --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(MODEL-TRAINING-PIPELINE-NAME)|cut -d" " -f1) --yes
+  continueOnError: true
+  displayName: 'Delete Training Pipeline if exists'
+
   - bash:
       az pipelines create --name $(MODEL-TRAINING-PIPELINE-NAME)
                           --description 'Pipeline for Model training'
@@ -130,6 +135,11 @@ jobs:
                           --skip-first-run true        
     displayName: 'Create Training Pipeline from YAML'
 
+  - bash: 
+    az pipelines delete --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(BATCH-SCORING-PIPELINE-NAME)|cut -d" " -f1) --yes
+  continueOnError: true
+  displayName: 'Delete Batch Scoring Pipeline if exists'
+
   - bash:
       az pipelines create --name $(BATCH-SCORING-PIPELINE-NAME)
                           --description 'Pipeline for Model training'
@@ -140,4 +150,4 @@ jobs:
                           --org $(System.TeamFoundationCollectionUri) 
                           --project $(ADO-PROJECT-NAME)   
                           --skip-first-run true                    
-    displayName: 'Create Batch scoring Pipeline from YAML'
+    displayName: 'Create Batch Scoring Pipeline from YAML'
