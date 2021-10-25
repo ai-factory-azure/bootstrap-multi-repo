@@ -60,7 +60,7 @@ jobs:
   - bash:
       az devops service-endpoint delete --id $(az devops service-endpoint list 
                                               --organization $(System.TeamFoundationCollectionUri) 
-                                              --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-RM-SERVICE-PRINCIPAL-ID-DEV)|cut -d" " -f1) 
+                                              --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) 
                                               --yes
     continueOnError: true
     displayName: 'Delete Azure Service Connection if exists'  
