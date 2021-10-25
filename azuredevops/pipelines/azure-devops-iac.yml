@@ -47,7 +47,7 @@ jobs:
                                               --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) 
                                               --yes
     continueOnError: true
-    displayName: 'Delete Service Endpoint if exists'
+    displayName: 'Delete Github Service Endpoint if exists'
 
   - bash: 
       az devops service-endpoint github create  --github-url $(GITHUB-ORG-URL) 
@@ -58,6 +58,14 @@ jobs:
     displayName: 'Create Github Service Endpoint if does not exist'
 
   - bash:
+      az devops service-endpoint azurerm delete --id $(az devops service-endpoint list 
+                                              --organization $(System.TeamFoundationCollectionUri) 
+                                              --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-RM-SERVICE-PRINCIPAL-ID-DEV)|cut -d" " -f1) 
+                                              --yes
+    continueOnError: true
+    displayName: 'Delete Azure Service Connection if exists'  
+
+  - bash:
       az devops service-endpoint azurerm create --azure-rm-service-principal-id $(AZURE-RM-SERVICE-PRINCIPAL-ID-DEV)
                                           --azure-rm-subscription-id $(AZURE-RM-SUBSCRIPTION-ID-DEV)
                                           --azure-rm-subscription-name "$(AZURE-RM-SUBSCRIPTION-NAME-DEV)"
@@ -65,7 +73,6 @@ jobs:
                                           --name $(AZURE-SERVICE-ENDPOINT-NAME)
                                           --org $(System.TeamFoundationCollectionUri) 
                                           --project $(ADO-PROJECT-NAME)
-    continueOnError: true
     displayName: 'Create Azure Service Connection'
 
   - bash:
