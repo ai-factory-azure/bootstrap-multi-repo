@@ -118,10 +118,7 @@ jobs:
                           --skip-first-run true
     displayName: 'Create IAC Pipeline using YAML'
 
-  - bash: 
-      az pipelines delete --yes --id $(az pipelines list --project $(ADO-PROJECT-NAME) -o table |grep $(MODEL-TRAINING-PIPELINE-NAME)|cut -d" " -f1) 
-    continueOnError: true
-    displayName: 'Delete IAC Pipeline if exists'
+
 
   - bash:
       az pipelines create --name $(MODEL-TRAINING-PIPELINE-NAME)
