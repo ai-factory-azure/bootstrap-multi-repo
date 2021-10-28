@@ -99,9 +99,10 @@ jobs:
       git remote set-url origin https://$(AZURE-DEVOPS-EXT-GITHUB-USERNAME):$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
       cd project-$(PROJECT-NAME)-controller/devops-pipelines;
       cat deploy-model-batch-scoring.yml;
-      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/g' deploy-model-batch-scoring.yml;
+      sed 's/project-template-file-batch-code/project-$(PROJECT-NAME)-code/g' deploy-model-batch-scoring.yml;
       cat deploy-model-batch-scoring.yml;
-      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/g' deploy-model-training-pipeline.yml;
+      sed 's/project-template-file-batch-code/project-$(PROJECT-NAME)-code/g' deploy-model-training-pipeline.yml;
+      git status;
       git add -A;
       git commit -m "modified ymls to reflect new repo name";
       git push) &
