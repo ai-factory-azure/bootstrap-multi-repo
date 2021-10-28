@@ -98,8 +98,10 @@ jobs:
       git config --global user.name $(AZURE-DEVOPS-EXT-GITHUB-USERNAME);
       git remote set-url origin https://$(AZURE-DEVOPS-EXT-GITHUB-USERNAME):$(AZURE-DEVOPS-EXT-GITHUB-PAT)@github.com/ai-factory-azure/project-$(PROJECT-NAME)-controller;
       cd project-$(PROJECT-NAME)-controller/devops-pipelines;
-      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-batch-scoring.yml;
-      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/' deploy-model-training-pipeline.yml;
+      cat deploy-model-batch-scoring.yml;
+      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/g' deploy-model-batch-scoring.yml;
+      cat deploy-model-batch-scoring.yml;
+      sed 's/project-template-file-batch-code/$(PROJECT-NAME)/g' deploy-model-training-pipeline.yml;
       git commit -am "modified ymls to reflect new repo name";
       git push) &
     displayName: 'Pull git repo controller and modify yml to reflect new repo name' 
