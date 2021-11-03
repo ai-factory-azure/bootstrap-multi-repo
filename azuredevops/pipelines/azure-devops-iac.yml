@@ -56,6 +56,10 @@ jobs:
                                                 --project $(ADO-PROJECT-NAME)
     continueOnError: true
     displayName: 'Create Github Service Endpoint if does not exist'
+    
+  - bash:
+      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(GITHUB-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
+    displayName: 'Update Github Service Endpoint'
 
   - bash:
       az devops service-endpoint delete --id $(az devops service-endpoint list 
@@ -74,6 +78,10 @@ jobs:
                                           --org $(System.TeamFoundationCollectionUri) 
                                           --project $(ADO-PROJECT-NAME)
     displayName: 'Create Azure Service Connection'
+    
+  - bash:
+      az devops service-endpoint update --id $(az devops service-endpoint list --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME) -o table |grep $(AZURE-SERVICE-ENDPOINT-NAME)|cut -d" " -f1) --enable-for-all --organization $(System.TeamFoundationCollectionUri) --project $(ADO-PROJECT-NAME)
+    displayName: 'Update Azure service endpoint'
 
   - bash:
       curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
